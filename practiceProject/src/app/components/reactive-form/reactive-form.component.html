@@ -1,0 +1,27 @@
+<form style="margin: 16px;" [formGroup]="contactForm" (ngSubmit)="saveContact()">
+
+    <p class="form-group">
+        <label for="fName">First Name</label>
+        <input class="form-control" type="text" formControlName="fName">
+    </p>
+
+    <p class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="email" formControlName="email">
+    </p>
+
+    <div formGroupName="address">
+      
+            <p class="form-group">
+                <label for="city">city</label>
+                <input class="form-control" type="text" formControlName="city">
+            </p>
+            <p class="form-group">
+                <label for="pinCode">pin code</label>
+                <input class="form-control" type="text" formControlName="pinCode">
+            </p>
+       
+    </div>
+
+    <button style="background-color: blue; color: white; border-radius: 8px;" class="btn submit" type="submit">Save</button>
+</form>

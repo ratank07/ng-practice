@@ -1,0 +1,39 @@
+<h2 *ngIf="showTitle" [ngStyle]="{'color': 'red'}" class="panel panel-primary">{{title}}</h2>
+
+<button class="button" style="margin: 8px; background-color: blue; color: white;" (click)="showTitle = !showTitle"> SHow or hide title</button>
+
+
+<input type="text" [(ngModel)]="number">
+
+<div [ngSwitch]="number">
+    <div *ngSwitchCase="1">One</div>
+    <div *ngSwitchCase="2">Two</div>
+    <div *ngSwitchCase="3">Three</div>
+    <div *ngSwitchDefault> this is defalt value</div>
+</div>
+
+<div class="panel-body">
+    <div class="table-responsive">
+    <table  class="table">
+        <thead>
+            <tr>
+                <td>Number</td>
+                <td> Id</td>
+                <td>Name</td>
+                <td>Address</td>
+                <td>Release On</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let movie of movies;let i = index; let odd = odd; let even = even" [ngClass]="{odd: odd, even: even}">
+                <td>{{i + 1 }}</td>
+                <td>{{movie.title}}</td>
+                <td>  {{movie.director}}</td>
+                <td>{{movie.cast}}</td>
+                <td>{{movie.releaseDate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+

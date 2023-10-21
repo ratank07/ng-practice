@@ -1,0 +1,627 @@
+
+explore angular cli commands
+explore angular components
+explore all pipes from from angular website
+explore npm js
+explore diffrence between css and scss
+
+Component: building block of every angular application
+
+it includes 4 files
+html, ts, css, spec ts 
+
+component syntax: 
+
+component file has 3 main building blocks
+1. template
+2. class
+3. Metadata
+
+app.component.ts
+import { Component } from '@angular/core'
+
+@Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    stylesUrl: ['./app.component.scss']
+})
+
+export class appComponent {
+        title: 'My first Angular App'
+}
+
+@Component is decorator and used to convert normal typescript class to angular component
+
+app-root is selector | name of component, use to select or display component in application
+
+app.component.html:  is html template document associated with this component, is specified with templateUrl meta data in @Compooent decorator
+
+component properties: in above eg: title is property of appComponent;
+
+DataBinding: to bind data from component to template
+
+types of data binding:
+
+one way binding: data flows in one direction, bind data from component to view
+1. Interpollation - bind propery in {{}} brace eg: {{title}}
+2. properyBinding- [proprty-target]="propet value"
+eg: <button (click)="" [disabled]="isTrue">submit</button>
+3. two way binding: it flows data from both directions, from component to html and html to component, 
+ngModel directive requires formModule import
+
+syntax: <input [(ngModel)]="propertyName">
+
+4. event binding: event binding is when we to some action to perform some evnt, eh button click
+
+<button (click)="saveData()> save </button>
+
+Directives: to modify, update, disply data to UI or screen changes behavior styles of html
+
+Types of directives:  
+1.  Structural directive: it updates or changes structure of html or dom, 
+* here represents its structural directives
+eg: *ngIf, ngSwitch, *ngFor
+
+*ngIf: to show oR hide html element conditionaly on true or false expresssopm
+showDiv = true
+eg: <div *ngIf="true or false">
+content of expression condition is true
+</div>
+
+2. Attribute directive.  it changes the behavior or styles of html element
+eg: ngClass, ngStyles
+
+3. Component directive :  
+
+
+Module: it is collection of related features or functionality
+
+Syntax: 
+  
+app.module.ts
+
+import {AppComponent} from './app.component.ts'
+import {ngModule} from '@angular/core'
+import {BriwserModule} from '@angular/platform-browser'
+
+@ngModule({
+    decleration: [
+        appComponent,
+        otherComponent
+    ],
+    import: [
+        BriwserModule
+    ],
+    provider: [],
+    bootstrap: [AppComponent]
+}),
+
+export class AppModule {
+
+}
+
+
+ngModule: it is decorator used to convert typescript or javascript class to anglar module
+
+decleration: its used to include component into module
+
+providers: used to includes servces to module
+
+imports: used to import other modules in to this module
+
+
+Interview questions:
+1. What is component
+2. what is data binding in angular
+
+ngFor: to iterare list of element to show on UI
+
+syntax: 
+<html-element *ngFor="let item of items"> 
+<div>{{item.}}
+</html-element>
+
+
+ng-switch directive - its structural directive, it show content of html on some predefined condition
+
+syntax: 
+
+<container [ngSwitch]="expression"> 
+<element  *ngSwitchCase="matching-expression"> some html content </element>
+<element *ngSwitchCase="matching-expression"> some html content </element>
+...
+<element *ngSwichDefalt="matching-expression"> some html content </element>
+
+...
+</container>
+
+
+ngClass directive: its attribute directi, used for change the behavior of html
+
+syntax: 
+<element [ngClass]="{expression}"
+
+ngStyle: to styles dynamicaly to html
+
+syntax: 
+<element [ngStyle]="{"stylesNames: styleexpress"}">... </element>
+
+stylesNames: its our css tsyle properties, color, font-size
+
+styleexpress: its css property values< red, 12px
+
+adding bootstrap in angulr,
+add this file in html
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+      crossorigin="anonymous">
+add this cdn in index.html file
+
+add // @import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+to Styles.scss file
+
+
+---------Interview questions:
+1. What are directives
+2. explain structral and attribute directives
+
+Pipe: to transform our html view with variable, it take data as input and tranform or formate data to display in template
+
+syntax: 
+<html-element> {{data | 'pipeName:optionalParams'}} </html-element>
+
+eg: 
+<div> {{toDate | date}}
+
+creating custom pipe:
+
+1. create pipe class
+2. take @pipe decoratoe with class
+3. give metadata as name in @pipe decorator
+4. implement pipeTransform interface to our class
+5. take tranform method and pass first paramater to transform method, also can pass additional paramater
+6. register pipe class to angular module
+7.  use our custom pipe in html as predefined pipe 
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'tempConversion'
+})
+
+export class TempConversionPipe implements PipeTransform {
+
+  transform(value: number, unit: any) {
+    //eg  title :
+    if(unit=='C') {
+      var temp = (value - 32) / 18;
+      return temp;
+    } else if(unit=='F') {
+      var temp = (value *1.8) + 32;
+      return temp;
+    }
+    return;
+  }
+}
+
+Componennt communication: 
+explore decorators in angular
+what is component communication
+how to pass data  child component to parent component and parent to child component
+how to pass data without parent child relation
+explore data binding in angular
+
+1. passing data from parent to child; for this we use @Input decorator
+use Input decorator in child component, to access data in child, that data passed from parent
+
+syntax: parent component :
+<app-parant [firstName]="firtName" </app-parent>
+
+child component: 
+@Input() firstName: any = "";
+
+2. passing data from child to parant: we use @output decorator
+to pass data from child to parant, we use event binding for this
+
+syntax: 
+parant COMPONENT
+<app-parent (parantMethod)"parantMethod($event)">
+
+child component: 
+
+@Ouput() callParent = eventEmitter: new EventEmitter();
+
+callMethod() {
+  callParent.emit('some data');
+}
+
+passing data between without parent child relationship
+
+pass data in observables, we subscribing data when it changes
+
+template reffrence variable:
+it reffers to any dom element, component or directive in template
+eg: h1, div
+
+syntax: 
+<input type='text' #firstName>
+
+{{firstName.value}}
+
+ng-container in angular
+
+with ng-container we add new division in the template without adding new html element to dom
+it does not rendor in the dom, its just syntax element, its virtual division element
+
+use: we can use it in ng-if or in ng-for directive
+
+eg: 
+
+<ng-container *ngFor="let item of items">
+  <div>item</div>
+</ng-container>
+
+ng if else syntax:
+
+when we want to show else condition if is false then we use this
+
+syntax: 
+
+<ng-container *ngIf="someCondition; else elseTemplate"> 
+data if condi is true
+</ng-container>
+
+<ng-template # elseTemplate> 
+..data 
+</ng-template>
+
+<ul>
+    <ng-container *ngFor="let item of items">
+        <li *ngIf="item.active; else inactiveTemp">
+            {{item.name}}
+        </li>
+
+        <ng-template #inactiveTemp> Inactive course {{item.name}}</ng-template>
+    </ng-container>
+
+</ul>
+
+
+
+11-10-23
+
+Angular component lifecycle:
+
+component lifecycle definition: journey of component from start to end. 
+
+- what is lifecycle hooks: steps to check input properties, change or updation , remove
+
+- what is change detection cycle: it is synchronization of component properties with our template or html
+
+- constructor -  it loads with normal javascript class when class initialize, 
+
+8 steps for anguar lifecycle hooks:
+
+-ngOnChanges: when our input properties changes it excecutes, it executes first and repeteadly when property changes
+-ngOnInit: it execute only once in lifecycle after component creation, it used when we need to initialize some properties or data.
+-ngDoCheck: it execute on every change detection cycle, onpush , default, when we use onpush chage detection we use this hook
+-ngAfterCotentInit: it calls after projected content is initialized,  
+eg: app.component.html
+<child-comp><div> .. dom projected content</div> </child-comp>
+
+-ngAfterContentChecked: it checks projected content after every change detection cycle
+-ngAfterViewInit: it calls after component view and projected content are initialized, 
+-ngAfterViewChecked: it checks component view and projected content 
+-ngOnDestroy: it calls before component gets removed, we do any cleanup logic
+
+how to use lifecycle hooks- 
+importing hook interfaces
+eg: import {component, Oninit} from 'angular/code'
+and implementating hook interfaces
+
+eg: export class AppComponent implements onInit {
+  // create hook method
+  ngOnInit() {
+
+  }
+}
+
+order of execution of life cycle hooks
+
+example
+
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, DoCheck, AfterContentInit, AfterContentChecked } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+
+export class AppComponent implements OnInit, OnDestroy, OnChanges, DoCheck, AfterContentInit, AfterContentChecked {
+
+  constructor() {
+    console.log('app component constructed');
+  }
+  ngOnDestroy(): void {
+    console.log('appcompojent: destroy');
+    
+  }
+  ngAfterContentInit(){
+    console.log('apppcomponent: afercontentinit');
+    
+  }
+  ngAfterContentChecked() {
+    console.log('apppcomponent: afercontentchecked');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+       console.log('appcomponent:ngonchanges');
+  }
+
+  ngOnInit() {
+    console.log('appcomponent:ngoninit');
+    
+  }
+
+  ngDoCheck() {
+    console.log('appcomponent:ngDocheck');
+  }
+
+  title = 'My first angular app';
+
+
+  showAlert() {
+    alert('event binding angular')
+  }
+
+  updateParnent(event: any) {
+    alert(event);
+  }
+}
+
+forms in angular:
+
+1. template driven form: - we define behavior using directive and attributes in template, 
+we code more in template and less in component ts file,
+  1. set up form with ngForm directive
+  2. input controls defined using ngModel
+  3. ngModel provide two way binding
+  4. validation confogured using directive in template,
+
+importing formsModule in app.mudule.ts file
+
+import {FormsModule} from "@angular/core";
+
+@ngModule({
+  import: [FormsModule]
+})
+defiine template form using ngForm directive
+
+
+<form #myForm="ngForm" (ngSubmit)="submitForm(myForm)>
+  <p> 
+  <label for="fname">First Name </label>
+  <input type="text" name="fname" ngModel>
+  </p>
+
+  <p> 
+  <label for="email">Email </label>
+  <input type="email" name="email" ngModel>
+  </p>
+
+  <button type="submit"> Submit</button>
+ </form>
+
+2. reactive form: it also known as model driven form, we import ReactiveFormsModule for this, 
+ we use formGroup, formControl, formArays
+ we define structure of our form in component class, aslo we define validation in component class
+
+how to use reactive form
+
+1. import ReactiveFormsModule
+  app.module.ts 
+
+  import {ReactiveFormsModule} from '@angular/forms'
+
+  @ngModule({
+    imports: [ReactiveFormsModule, formsModule, ]
+  })
+
+2. create form model in component class using formGroup, formControl, formArays
+
+  app.component.ts 
+
+  import {formGroup, formCOntrol, formArray} from '@angular/form'
+
+contactForm = new FormGroup({
+  fName: new formControl('Ratan'),
+  email: new FormControl(),
+})
+
+3. create html form ressemmling the form model created in component class,
+
+app.component.html 
+
+<form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+
+<p> 
+<label> First Name </label>
+<input type="text"  formControlName="fName" >
+</p>
+
+<p> 
+<label> Email </label>
+<input type="email" formControlName="email" >
+</p>
+
+<button type="submit">Submit Form</button>
+ </form>
+4. bind html form with the model
+
+
+-- Services and dependancy injection
+
+1. what is services in angular
+2. what is dependancy injection
+3. what is injector, @injectable amd @inject
+4. what are providers
+5. what is injection token
+6. what is hierarchical dependancy injection
+7. what is angular singletone services
+8. what is providedin root, any
+9. what is @self, @skipSelf, and @optional decorator
+10 @what is @Host decorator in angular
+11. what is ViewProviders in angular
+
+1. what is services in angular: 
+  service peace of reusable code,  A code that you will use in many components across your application
+What Angular Services are used for
+Features that are independent of components such a logging services
+Share logic or data across components
+Encapsulate external interactions like data access
+
+
+2. what is dependancy injection: 
+Dependency Injection (DI) is a technique in which a class receives its dependencies from external sources rather than creating them itself.
+Our AppComponent does not create the instance of the service. It just asks for it in its Constructor. The responsibility of Creating the service falls on the creator of the AppComponent.
+
+app.component.ts
+
+let productService = new productService(); without  dependancy injection
+
+constructor(private productService: ProjectService) { // injecting dependancy
+
+}
+
+
+3. what is injector, @injectable amd @inject;
+injector is responsible for injecting dependancy in component or service,
+
+injector is created when our app bootstrap, /
+registring service with injector: 
+in component
+providers: [productService]
+
+@inject: contructor parameter when angular need to inject paramter provided in injector token, 
+
+4. what are providers: 
+it allows to register class or function with angular dependancy injectin system. 
+@injectable, providers, 
+
+
+5. what is injection token
+6. what is hierarchical dependancy injection
+7. what is angular singletone services
+8. what is providedin root, any
+9. what is @self, @skipSelf, and @optional decorator
+10 @what is @Host decorator in angular
+11. what is ViewProviders in angular
+
+
+Routing: navigation from one view to another view,
+eg: menu bar to navigate to diff viewsusing angular riuter
+
+Angular Router: 
+@angular/router has router related functionalitites
+
+1. navigate between views
+2. passing parameters to the view
+3. handle back and forward buttons of browser
+4. protect routr from unathorized users to view. 
+
+Component of router
+
+1. Router : handling click events, navigate(), navigateByUrl()
+2. Route: it has path of route, we can parse route url 
+3. router outlet: <router-outlet> its placeholder for app, here our app components shows, child routes visible here
+4. RouterLink: its directive to handle binding of html route path
+5. RouterLinkActive: it activate css class to current active route
+
+
+registering route in app
+
+import RouterModule from '@angular/router'
+
+app.module.ts 
+
+export const appRoutes: Routes = [
+  {path: 'home', component: homeComponent},
+  {path: 'product', component: ProductCopmponent}
+]
+
+import: [RouterModule.forRoot(appRoutes)]
+
+
+HttpClient 
+
+HttpClient is model available in '@angular/common/http'
+
+app.module.ts
+
+import {HttpClientModule} from '@angular/common/http'
+
+@ngModule({
+  imports: [HttpClientModule]
+})
+
+to use it in our component or in service, we need to import HttpClient and crete dependancy and inject in constructor
+
+
+app.component.ts 
+import {HttpClient} from '@angular/common/http'
+constructor(private httpClient: HttpClient) //injecting dependancy {
+  this.httpClient.get('url/abc')
+}
+
+
+observables: use in asynchronous programming, 
+synchronous: execute req one by one
+ 3 req, 1 take 30 sec, 2 req 1 min, 3 req 2 min
+1 30+ 2 1 min + 3 2 min = total time to execute 3 min 30 sec
+
+async: dont wait for req to complete, background work,  30 , 1 min, 2 min =>  2 min total req execute
+
+
+subscribe to observable,
+
+eg: subscribe to newspaper, wil get paper when its dispached,
+
+ youtube: you will get notification on new video when you subscribe to channel
+
+ in angular import observable to use subscription in angular
+
+
+ HTTP REQ Types
+
+1. http get 
+syntax: 
+get(url, options: {
+  headers: HttpHeaders,
+  params: HtttpParams,
+  observe: body | response |events ,
+  responsType: Text | blob | json | arrayBuffer
+}): observable
+
+
+2. http post 
+3. http delete
+4. http put
+5. htpp patch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

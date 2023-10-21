@@ -1,0 +1,404 @@
+
+explore angular cli commands
+explore angular components
+explore all pipes from from angular website
+explore npm js
+explore diffrence between css and scss
+
+Component: building block of every angular application
+
+it includes 4 files
+html, ts, css, spec ts 
+
+component syntax: 
+
+component file has 3 main building blocks
+1. template
+2. class
+3. Metadata
+
+app.component.ts
+import { Component } from '@angular/core'
+
+@Component({
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    stylesUrl: ['./app.component.scss']
+})
+
+export class appComponent {
+        title: 'My first Angular App'
+}
+
+@Component is decorator and used to convert normal typescript class to angular component
+
+app-root is selector | name of component, use to select or display component in application
+
+app.component.html:  is html template document associated with this component, is specified with templateUrl meta data in @Compooent decorator
+
+component properties: in above eg: title is property of appComponent;
+
+DataBinding: to bind data from component to template
+
+types of data binding:
+
+one way binding: data flows in one direction, bind data from component to view
+1. Interpollation - bind propery in {{}} brace eg: {{title}}
+2. properyBinding- [proprty-target]="propet value"
+eg: <button (click)="" [disabled]="isTrue">submit</button>
+3. two way binding: it flows data from both directions, from component to html and html to component, 
+ngModel directive requires formModule import
+
+syntax: <input [(ngModel)]="propertyName">
+
+4. event binding: event binding is when we to some action to perform some evnt, eh button click
+
+<button (click)="saveData()> save </button>
+
+Directives: to modify, update, disply data to UI or screen changes behavior styles of html
+
+Types of directives:  
+1.  Structural directive: it updates or changes structure of html or dom, 
+* here represents its structural directives
+eg: *ngIf, ngSwitch, *ngFor
+
+*ngIf: to show oR hide html element conditionaly on true or false expresssopm
+showDiv = true
+eg: <div *ngIf="true or false">
+content of expression condition is true
+</div>
+
+2. Attribute directive.  it changes the behavior or styles of html element
+eg: ngClass, ngStyles
+
+3. Component directive :  
+
+
+Module: it is collection of related features or functionality
+
+Syntax: 
+  
+app.module.ts
+
+import {AppComponent} from './app.component.ts'
+import {ngModule} from '@angular/core'
+import {BriwserModule} from '@angular/platform-browser'
+
+@ngModule({
+    decleration: [
+        appComponent,
+        otherComponent
+    ],
+    import: [
+        BriwserModule
+    ],
+    provider: [],
+    bootstrap: [AppComponent]
+}),
+
+export class AppModule {
+
+}
+
+
+ngModule: it is decorator used to convert typescript or javascript class to anglar module
+
+decleration: its used to include component into module
+
+providers: used to includes servces to module
+
+imports: used to import other modules in to this module
+
+
+Interview questions:
+1. What is component
+2. what is data binding in angular
+
+ngFor: to iterare list of element to show on UI
+
+syntax: 
+<html-element *ngFor="let item of items"> 
+<div>{{item.}}
+</html-element>
+
+
+ng-switch directive - its structural directive, it show content of html on some predefined condition
+
+syntax: 
+
+<container [ngSwitch]="expression"> 
+<element  *ngSwitchCase="matching-expression"> some html content </element>
+<element *ngSwitchCase="matching-expression"> some html content </element>
+...
+<element *ngSwichDefalt="matching-expression"> some html content </element>
+
+...
+</container>
+
+
+ngClass directive: its attribute directi, used for change the behavior of html
+
+syntax: 
+<element [ngClass]="{expression}"
+
+ngStyle: to styles dynamicaly to html
+
+syntax: 
+<element [ngStyle]="{"stylesNames: styleexpress"}">... </element>
+
+stylesNames: its our css tsyle properties, color, font-size
+
+styleexpress: its css property values< red, 12px
+
+adding bootstrap in angulr,
+add this file in html
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+      crossorigin="anonymous">
+add this cdn in index.html file
+
+add // @import "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+to Styles.scss file
+
+
+---------Interview questions:
+1. What are directives
+2. explain structral and attribute directives
+
+Pipe: to transform our html view with variable, it take data as input and tranform or formate data to display in template
+
+syntax: 
+<html-element> {{data | 'pipeName:optionalParams'}} </html-element>
+
+eg: 
+<div> {{toDate | date}}
+
+creating custom pipe:
+
+1. create pipe class
+2. take @pipe decoratoe with class
+3. give metadata as name in @pipe decorator
+4. implement pipeTransform interface to our class
+5. take tranform method and pass first paramater to transform method, also can pass additional paramater
+6. register pipe class to angular module
+7.  use our custom pipe in html as predefined pipe 
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'tempConversion'
+})
+
+export class TempConversionPipe implements PipeTransform {
+
+  transform(value: number, unit: any) {
+    //eg  title :
+    if(unit=='C') {
+      var temp = (value - 32) / 18;
+      return temp;
+    } else if(unit=='F') {
+      var temp = (value *1.8) + 32;
+      return temp;
+    }
+    return;
+  }
+}
+
+Componennt communication: 
+explore decorators in angular
+what is component communication
+how to pass data  child component to parent component and parent to child component
+how to pass data without parent child relation
+explore data binding in angular
+
+1. passing data from parent to child; for this we use @Input decorator
+use Input decorator in child component, to access data in child, that data passed from parent
+
+syntax: parent component :
+<app-parant [firstName]="firtName" </app-parent>
+
+child component: 
+@Input() firstName: any = "";
+
+2. passing data from child to parant: we use @output decorator
+to pass data from child to parant, we use event binding for this
+
+syntax: 
+parant COMPONENT
+<app-parent (parantMethod)"parantMethod($event)">
+
+child component: 
+
+@Ouput() callParent = eventEmitter: new EventEmitter();
+
+callMethod() {
+  callParent.emit('some data');
+}
+
+passing data between without parent child relationship
+
+pass data in observables, we subscribing data when it changes
+
+template reffrence variable:
+it reffers to any dom element, component or directive in template
+eg: h1, div
+
+syntax: 
+<input type='text' #firstName>
+
+{{firstName.value}}
+
+ng-container in angular
+
+with ng-container we add new division in the template without adding new html element to dom
+it does not rendor in the dom, its just syntax element, its virtual division element
+
+use: we can use it in ng-if or in ng-for directive
+
+eg: 
+
+<ng-container *ngFor="let item of items">
+  <div>item</div>
+</ng-container>
+
+ng if else syntax:
+
+when we want to show else condition if is false then we use this
+
+syntax: 
+
+<ng-container *ngIf="someCondition; else elseTemplate"> 
+data if condi is true
+</ng-container>
+
+<ng-template # elseTemplate> 
+..data 
+</ng-template>
+
+<ul>
+    <ng-container *ngFor="let item of items">
+        <li *ngIf="item.active; else inactiveTemp">
+            {{item.name}}
+        </li>
+
+        <ng-template #inactiveTemp> Inactive course {{item.name}}</ng-template>
+    </ng-container>
+
+</ul>
+
+
+
+11-10-23
+
+Angular component lifecycle:
+
+component lifecycle definition: journey of component from start to end. 
+
+- what is lifecycle hooks: steps to check input properties, change or updation , remove
+
+- what is change detection cycle: it is synchronization of component properties with our template or html
+
+- constructor -  it loads with normal javascript class when class initialize, 
+
+8 steps for anguar lifecycle hooks:
+
+-ngOnChanges: when our input properties changes it excecutes, it executes first and repeteadly when property changes
+-ngOnInit: it execute only once in lifecycle after component creation, it used when we need to initialize some properties or data.
+-ngDoCheck: it execute on every change detection cycle, onpush , default, when we use onpush chage detection we use this hook
+-ngAfterCotentInit: it calls after projected content is initialized,  
+eg: app.component.html
+<child-comp><div> .. dom projected content</div> </child-comp>
+
+-ngAfterContentChecked: it checks projected content after every change detection cycle
+-ngAfterViewInit: it calls after component view and projected content are initialized, 
+-ngAfterViewChecked: it checks component view and projected content 
+-ngOnDestroy: it calls before component gets removed, we do any cleanup logic
+
+how to use lifecycle hooks- 
+importing hook interfaces
+eg: import {component, Oninit} from 'angular/code'
+and implementating hook interfaces
+
+eg: export class AppComponent implements onInit {
+  ngOnInit() {
+
+  }
+}
+create hook method
+
+
+
+order of execution of life cycle hooks
+
+example
+
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges, DoCheck, AfterContentInit, AfterContentChecked } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+
+export class AppComponent implements OnInit, OnDestroy, OnChanges, DoCheck, AfterContentInit, AfterContentChecked {
+
+  constructor() {
+    console.log('app component constructed');
+  }
+  ngOnDestroy(): void {
+    console.log('appcompojent: destroy');
+    
+  }
+  ngAfterContentInit(){
+    console.log('apppcomponent: afercontentinit');
+    
+  }
+  ngAfterContentChecked() {
+    console.log('apppcomponent: afercontentchecked');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+       console.log('appcomponent:ngonchanges');
+  }
+
+  ngOnInit() {
+    console.log('appcomponent:ngoninit');
+    
+  }
+
+  ngDoCheck() {
+    console.log('appcomponent:ngDocheck');
+  }
+
+  title = 'My first angular app';
+
+
+  showAlert() {
+    alert('event binding angular')
+  }
+
+  updateParnent(event: any) {
+    alert(event);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

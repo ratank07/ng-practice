@@ -1,0 +1,31 @@
+<form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
+    <p> 
+    <label for="fname">First Name </label>
+    <input type="text" name="fname" required [(ngModel)]="contactDetails.name">
+    </p>
+  
+    <p> 
+    <label for="email">Email </label>
+    <input type="email" required name="email" [(ngModel)]="contactDetails.email">
+    </p>
+
+    <div ngModelGroup="address">
+        <p> 
+            <label for="city">City </label>
+            <input type="text" maxlength="10" name="city" [(ngModel)]="contactDetails.address.city">
+            </p>
+          
+            <p> 
+            <label for="pinode">Pin Code </label>
+            <input type="text" name="pinCode" minlength="6" [(ngModel)]="contactDetails.address.pinCode">
+            </p>
+    </div>
+  
+    <button [disabled]="!myForm.valid" type="submit"> Submit</button>
+
+    <div class="reset" (click)="resetForm(myForm)">Reset Form</div>
+    <div class="reset" (click)="patchValuesInForm(myForm)">patch values</div>
+    
+   </form>
+   
+   <div>{{myForm.value | json}}</div>
