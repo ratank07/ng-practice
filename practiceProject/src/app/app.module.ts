@@ -14,7 +14,8 @@ import { TempDrivenFormComponent } from './components/temp-driven-form/temp-driv
 import { ReactiveFormComponent } from './components/reactive-form/reactive-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpComponent } from './components/http/http.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { PeopleApiComponent } from './people-api/people-api.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {HttpClientModule} from '@angular/common/http'
     TempDrivenFormComponent,
     ReactiveFormComponent,
     HttpComponent,
+    PeopleApiComponent,
   ],
   imports: [
     BrowserModule,

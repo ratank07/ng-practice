@@ -605,9 +605,35 @@ get(url, options: {
 
 
 2. http post 
+
+  will use mock json server to make post req to server
+  install json-server package
+
+  1. npm install -g json-server
+  2. create db.json file and add some data in file,
+
+  {
+    people: [
+      {
+        id: 1,
+        name: 'Ratan',
+      },
+      {
+        id: 2,
+        name: 'Jay'
+      }
+    ]
+  } 
+
+3. start json server 
+json-server --watch d.json
+
+
 3. http delete
 4. http put
 5. htpp patch
+
+
 
 
 

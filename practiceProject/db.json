@@ -1,0 +1,36 @@
+{
+  "people": [
+    {
+      "id": 1,
+      "name": "Ratan"
+    },
+    {
+      "id": 2,
+      "name": "Jay"
+    },
+    {
+      "name": "Ashutosh",
+      "id": 3
+    },
+    {
+      "name": "Arohi",
+      "id": 4
+    },
+    {
+      "name": "Pooja",
+      "id": 5
+    },
+    {
+      "name": "Renuka",
+      "id": 6
+    },
+    {
+      "name": "Renuka",
+      "id": 7
+    },
+    {
+      "name": "Renuka",
+      "id": 8
+    }
+  ]
+}
