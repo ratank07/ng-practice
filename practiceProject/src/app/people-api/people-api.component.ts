@@ -35,9 +35,9 @@ export class PeopleApiComponent implements OnInit, OnDestroy {
       })
     }
 
-    ngOnDestroy(): void {
-      this.addPersonSubscription.unsubscribe()
-    }  
+  ngOnDestroy(): void {
+        this.addPersonSubscription.unsubscribe()
+   }  
   
 
 }
