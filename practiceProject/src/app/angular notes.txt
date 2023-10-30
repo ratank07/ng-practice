@@ -608,7 +608,7 @@ get(url, options: {
 
   will use mock json server to make post req to server
   install json-server package
-
+ 
   1. npm install -g json-server
   2. create db.json file and add some data in file,
 
@@ -637,9 +637,87 @@ json-server --watch d.json
 5. htpp patch
 
 
+Styling in angular: 
+
+what is viewencapsulation in angular.
+global styles in angular.
+
+
+defining global styles
+we define styles in our main index.html or angular.json or angular-cli.json
 
 
 
+View encapsulation: 
+it defines styles affected only in selected component, or part of component, 
+
+3 methods to add veiw encapsulation
+
+1. ViewenCapsulation.emulated: 
+
+this is deafault way of defining styles in angular, 
+
+syntax: 
+
+@Component({
+  selector: 'app-name',
+  templateUrl: 'app.compo.html',
+  styles: ['p {color: red} 
+  div {color: ''}
+  '],
+  encapsulation: ViewEncapsulation.emulated
+})
+
+2. ViewenCapsulation.none
+when we do not need styles encapsulation
+it overrite styles with other component: styles defined in one component affect styles defined in other component
+@Component({
+  selector: 'app-name',
+  templateUrl: 'app.compo.html',
+  styles: ['p {color: red} 
+  div {color: ''}
+  '],
+  
+  encapsulation: ViewEncapsulation.None
+})
+
+3. ViewenCapsulation.ShadowDom
+
+it create sub-tree of dom, browser keep saperate style sub-tree than dom tree
+
+it do not affed our main dom tree, 
+
+
+
+--- styles and class binding
+
+
+style binding
+syntax: 
+
+<div [style.style-property]=">  this is div with style binding <div>
+
+app.componnet.ts 
+color: '';
+eg: 
+<div [style.color]="color"> this is div with style binding <div>
+<button [style.fontSize.px]="20">Submit </button>
+
+setting multiple styles together
+
+<p [style.color]="color" [style.font-size.px]="30"
+[style.background-color]="color"> P tag multipe style binding</p>
+
+Class binding: 
+
+similar to styles we can assign cssc lass with property binding
+
+syntax: 
+
+<div [className]="red"> this is div for class binding </div>
+
+conditionaly appliying lasses
+eg: <div [className]="true ? 'red" : 'blue'> this is div for class binding </div>
 
 
 

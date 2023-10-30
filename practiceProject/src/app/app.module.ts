@@ -15,7 +15,10 @@ import { ReactiveFormComponent } from './components/reactive-form/reactive-form.
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpComponent } from './components/http/http.component';
 import {HttpClientModule} from '@angular/common/http';
-import { PeopleApiComponent } from './people-api/people-api.component'
+import { PeopleApiComponent } from './people-api/people-api.component';
+import { EmulatedComponent } from './components/emulated/emulated.component';
+import { ShowDomEncapComponent } from './components/show-dom-encap/show-dom-encap.component';
+import { NoneEncapComponent } from './components/none-encap/none-encap.component'
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { PeopleApiComponent } from './people-api/people-api.component'
     ReactiveFormComponent,
     HttpComponent,
     PeopleApiComponent,
+    EmulatedComponent,
+    ShowDomEncapComponent,
+    NoneEncapComponent,
   ],
   imports: [
     BrowserModule,
