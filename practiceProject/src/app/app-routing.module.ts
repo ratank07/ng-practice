@@ -8,6 +8,7 @@ import { ReactiveFormComponent } from './components/reactive-form/reactive-form.
 import { TempDrivenFormComponent } from './components/temp-driven-form/temp-driven-form.component';
 import { HttpComponent } from './components/http/http.component';
 import { PeopleApiComponent } from './people-api/people-api.component';
+import { ObservableComponent } from './components/observable/observable.component';
 
 const routes: Routes = [
   { path: 'communication', component: CommunicationComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'reactive-form', component: ReactiveFormComponent },
   { path: 'template-form', component: TempDrivenFormComponent },
   { path: 'http', component: HttpComponent},
-  {path: 'people-api', component: PeopleApiComponent}
+  {path: 'people-api', component: PeopleApiComponent},
+  {  path: 'observable', component: ObservableComponent}
 ];
 
 @NgModule({

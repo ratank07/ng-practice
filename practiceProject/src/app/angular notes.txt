@@ -677,7 +677,7 @@ it overrite styles with other component: styles defined in one component affect 
   styles: ['p {color: red} 
   div {color: ''}
   '],
-  
+
   encapsulation: ViewEncapsulation.None
 })
 
@@ -685,7 +685,7 @@ it overrite styles with other component: styles defined in one component affect 
 
 it create sub-tree of dom, browser keep saperate style sub-tree than dom tree
 
-it do not affed our main dom tree, 
+it do not affecd our main dom tree, 
 
 
 
@@ -719,6 +719,81 @@ syntax:
 conditionaly appliying lasses
 eg: <div [className]="true ? 'red" : 'blue'> this is div for class binding </div>
 
+
+01-11-23 observable:
+
+What is a data stream?
+A data stream is the data that arrives over some time. 
+The stream of data can be anything. Like variables, user inputs, properties, caches, data structures, and even failures, etc
+
+At any point in time, the stream may emit the following three things.
+
+Value: i.e., the next value in the stream
+Complete: The stream has ended
+Error: The error has stopped the stream.
+
+
+Reactive Programming:
+Reactive programming is about creating the stream, emitting value, error, or complete signals, manipulating, transferring, or doing something useful with the data streams.
+This is where the RxJs come into the picture.
+
+What is RxJS
+The RxJS (Reactive Extensions Library for JavaScript) is a Javascript library that allows us to work with asynchronous data streams.
+
+Observable in Angular:
+Angular uses the RxJS library heavily in its framework to implement Reactive Programming. Some of the examples where reactive programming is used are
+Reacting to an HTTP request in Angular
+Value changes / Status Changes in Angular Forms
+
+The RxJs has two main components
+Observable
+Observers ( Subscribers)
+
+What is an Observable in Angular 
+An observable stream or simple Observable emits the value from the stream asynchronously. It emits the complete signals when the stream completes or an error 
+signal if the stream errors out.
+
+Who are the observers (subscribers): 
+The Observable is only useful if someone consumes the value emitted by the observable. We call them observers or subscribers.
+The observers communicate with the Observable using callbacks
+The observer must subscribe to the observable to receive the value from the observable. While subscribing, it optionally passes the three callbacks. next(), error() & complete()
+
+Angular Observable tutorial:
+Import the required libraries
+RxJs library is installed automatically when you create the Angular project. Hence there is no need to install it.
+ 
+Import the required libraries
+import { Observable } from 'rxjs';
+
+Observable Creation
+
+There are a few ways in which you can create observable in angular. The simplest is to use the Observable constructor. 
+
+
+obs = new Observable((observer) => {
+     console.log("Observable starts")
+     observer.next("1")
+     observer.next("2")
+     observer.next("3")
+   })
+The variable obs is now of Type observable.
+
+To make the observable emit values, we need to subscribe to them.
+
+Subscribing to the observable:
+We subscribe to the observable by invoking the subscribe method on it.
+
+Adding interval
+Error event
+Complete Event
+Observable Operators: 
+it operates on observable and return  new observable
+
+pipe: it create chain of observables to create new obserbavle for emit new values from obserbavles
+
+filter and map: filter use to filter data emited by obserbavle and map used to transform data 
+
+Unsubscribing from an Observable
 
 
 

@@ -18,7 +18,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { PeopleApiComponent } from './people-api/people-api.component';
 import { EmulatedComponent } from './components/emulated/emulated.component';
 import { ShowDomEncapComponent } from './components/show-dom-encap/show-dom-encap.component';
-import { NoneEncapComponent } from './components/none-encap/none-encap.component'
+import { NoneEncapComponent } from './components/none-encap/none-encap.component';
+import { ObservableComponent } from './components/observable/observable.component';
+import { StylingComponent } from './components/styling/styling.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { NoneEncapComponent } from './components/none-encap/none-encap.component
     EmulatedComponent,
     ShowDomEncapComponent,
     NoneEncapComponent,
+    ObservableComponent,
+    StylingComponent,
   ],
   imports: [
     BrowserModule,
